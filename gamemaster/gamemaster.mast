@@ -66,7 +66,12 @@ default shared GAMEMASTER_CONSOLE_ICON_SIZE = GAMEMASTER_CONSOLE.get("menu_icon_
         camera_id = to_id(cambot)
         set_inventory_value(client_id, "GAMEMASTER_COMBOT", camera_id)
         cambot_id = camera_id
-
+        
+        # combot.side determines how the map colors friends and foes
+        # (should probably make this more flexible in the future,
+        # though this at least seems better than it always being "tsn")
+        cambot.side = faction_ship.side if faction_ship is not None else "tsn"
+        
         # Set up scan sources
         stations_friendly = any_role("__npc__,__player__")
         link(cambot_id,"extra_scan_source" ,stations_friendly)
